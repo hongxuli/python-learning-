@@ -24,7 +24,7 @@ response = ur.urlopen(request).read()
 #response is a json file 
 
 ret = json.loads(response)
-#print(ret)
+# print(ret)
 
 translate = ret['data'][0]['v']
 print(translate)
