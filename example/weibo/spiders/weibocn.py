@@ -16,7 +16,7 @@ class WeiboSpider(Spider):
     
     weibo_url = 'https://m.weibo.cn/api/container/getIndex?uid={uid}&type=uid&page={page}&containerid=107603{uid}'
     
-    start_users = ['3217179555', '1742566624', '2282991915', '1288739185', '3952070245', '5878659096']
+    start_users = ['3388970724', '2804810207']
     
     def start_requests(self):
         for uid in self.start_users:
