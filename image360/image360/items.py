@@ -6,13 +6,11 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy import Field
 
 
-class SinaItem(scrapy.Item):
-    # define the fields for your item here like:
-    content = scrapy.Field()
-    author = scrapy.Field()
-    tag = scrapy.Field()
-    
-
-
+class Image360Item(scrapy.Item):
+    collection = table = 'images'
+    id = Field()
+    url = Field()
+    title = Field()

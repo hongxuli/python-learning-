@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/Users/hongxuli/anaconda3/envs/learning/bin/python"
+    "python.pythonPath": "/Users/hongxuli/anaconda3/envs/learning/bin/python",
+    "python.formatting.provider": "autopep8",
+    "python.linting.flake8Enabled": true
 }

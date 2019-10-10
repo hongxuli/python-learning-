@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for sina project
+# Scrapy settings for image360 project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'sina'
+BOT_NAME = 'image360'
 
-SPIDER_MODULES = ['sina.spiders']
-NEWSPIDER_MODULE = 'sina.spiders'
+SPIDER_MODULES = ['image360.spiders']
+NEWSPIDER_MODULE = 'image360.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'sina (+http://www.yourdomain.com)'
+#USER_AGENT = 'image360 (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'sina.middlewares.SinaSpiderMiddleware': 543,
+#    'image360.middlewares.Image360SpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'sina.middlewares.SinaDownloaderMiddleware': 543,
+#    'image360.middlewares.Image360DownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,14 +64,17 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+#ITEM_PIPELINES = {
+#    'image360.pipelines.Image360Pipeline': 300,
+#}
 ITEM_PIPELINES = {
-   'sina.pipelines.SinaPipeline': 300,
-   'sina.pipelines.MongoPipeline': 400,
-   
+    # 'sina.pipelines.SinaPipeline': 300,
+    'image360.pipelines.MongoPipeline': 400
+
 }
 
 MONGO_URI = 'localhost'
-MONGO_DB = 'quotes'
+MONGO_DB = 'images'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

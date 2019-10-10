@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for sina project
+# Scrapy settings for weibo project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,17 +9,17 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'sina'
+BOT_NAME = 'weibo'
 
-SPIDER_MODULES = ['sina.spiders']
-NEWSPIDER_MODULE = 'sina.spiders'
+SPIDER_MODULES = ['weibo.spiders']
+NEWSPIDER_MODULE = 'weibo.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'sina (+http://www.yourdomain.com)'
+#USER_AGENT = 'weibo (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -39,23 +39,28 @@ ROBOTSTXT_OBEY = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-#}
+DEFAULT_REQUEST_HEADERS = {
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Encoding': 'gzip, deflate, sdch',
+    'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2,mt;q=0.2',
+    'Connection': 'keep-alive',
+    'Host': 'm.weibo.cn',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+    'X-Requested-With': 'XMLHttpRequest',
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'sina.middlewares.SinaSpiderMiddleware': 543,
+#    'weibo.middlewares.WeiboSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'sina.middlewares.SinaDownloaderMiddleware': 543,
-#}
-
+DOWNLOADER_MIDDLEWARES = {
+    'weibo.middlewares.CookiesMiddleware': 554,
+    'weibo.middlewares.ProxyMiddleware': 555,
+}
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -65,13 +70,11 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'sina.pipelines.SinaPipeline': 300,
-   'sina.pipelines.MongoPipeline': 400,
-   
+    'weibo.pipelines.TimePipeline': 300,
+    'weibo.pipelines.WeiboPipeline': 301,
+    'weibo.pipelines.MongoPipeline': 302,
 }
 
-MONGO_URI = 'localhost'
-MONGO_DB = 'quotes'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -93,3 +96,12 @@ MONGO_DB = 'quotes'
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+MONGO_URI = 'localhost'
+
+MONGO_DATABASE = 'weibo'
+
+COOKIES_URL = 'http://localhost:5000/weibo/random'
+
+PROXY_URL = 'http://localhost:5555/random'
+
+RETRY_HTTP_CODES = [401, 403, 408, 414, 500, 502, 503, 504]
