@@ -4,16 +4,20 @@ relations = [{'id': 1111, 'follower': [1234,2341,2134],'fans':[9821,7632,8463]},
 
 
 def request(uid, callback=None):
-    return uid 
+    if callback is None:
+        return uid
+    else:    
+        return callback(uid) 
 
 
 def start_request():
     for uid in start_user:
+        print(uid)
         yield request(uid, callback=parse_user)
 
 
 def parse_user(uid):
-    yield out_put_value(uid)
+    yield  out_put_value(uid)
 
     if uid in start_user:
 
@@ -53,7 +57,15 @@ def out_put_value(uid):
 
 if __name__ == "__main__":
     a = start_request()
-    while True:
-        b=next(a)
-        while True:
-            next(b)
+    for i in a:   
+        for j in i:
+            try:
+                d=next(i)
+            
+            except Exception as e:
+                # if isinstance(e,StopIteration):
+                #     print('True')
+                pass
+           
+       
+        
