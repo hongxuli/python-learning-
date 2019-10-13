@@ -8,20 +8,20 @@
 # sys.path.append(dirpath)
 # # 启动爬虫,第三个参数为爬虫name
 # execute(['scrapy', 'crawl', 'weiboocn'])
-import os
-from scrapy.cmdline import execute
+# import os
+# from scrapy.cmdline import execute
 
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
+# os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-try:
-    execute(
-        [
-            'scrapy',
-            'crawl',
-            'weiboocn',
-            '-o',
-            'out.json',
-        ]
-    )
-except SystemExit:
-    pass
+# try:
+#     execute(
+#         [
+#             'scrapy',
+#             'crawl',
+#             'weiboocn',
+#             '-o',
+#             'out.json',
+#         ]
+#     )
+# except SystemExit:
+#     pass

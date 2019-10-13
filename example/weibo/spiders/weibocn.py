@@ -43,14 +43,17 @@ class WeiboSpider(Spider):
             yield user_item
             # 关注
             uid = user_info.get('id')
-            yield Request(self.follow_url.format(uid=uid, page=1), callback=self.parse_follows,
-                          meta={'page': 1, 'uid': uid})
-            # 粉丝
-            yield Request(self.fan_url.format(uid=uid, page=1), callback=self.parse_fans,
-                          meta={'page': 1, 'uid': uid})
-            # 微博
-            yield Request(self.weibo_url.format(uid=uid, page=1), callback=self.parse_weibos,
-                          meta={'page': 1, 'uid': uid})
+            uid = str(uid)
+            print(uid in self.start_users)
+            if uid in self.start_users:
+                yield Request(self.follow_url.format(uid=uid, page=1), callback=self.parse_follows,
+                            meta={'page': 1, 'uid': uid})
+                # 粉丝
+                yield Request(self.fan_url.format(uid=uid, page=1), callback=self.parse_fans,
+                            meta={'page': 1, 'uid': uid})
+                # 微博
+                yield Request(self.weibo_url.format(uid=uid, page=1), callback=self.parse_weibos,
+                            meta={'page': 1, 'uid': uid})
     
     def parse_follows(self, response):
         """
